@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.SysRole" >
+    <constructor >
+      <idArg column="ROLE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ROLE_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ROLE_DESC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SORT" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IS_SYS_INIT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MODIFY_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_NAME, ROLE_DESC, SORT, IS_SYS_INIT, CREATE_TIME, MODIFY_TIME, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.SysRole" >
+    insert into SYS_ROLE (ROLE_ID, ROLE_NAME, ROLE_DESC, 
+      SORT, IS_SYS_INIT, CREATE_TIME, 
+      MODIFY_TIME, STATE)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{isSysInit,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.SysRole" >
+    insert into SYS_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="roleDesc != null" >
+        ROLE_DESC,
+      </if>
+      <if test="sort != null" >
+        SORT,
+      </if>
+      <if test="isSysInit != null" >
+        IS_SYS_INIT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isSysInit != null" >
+        #{isSysInit,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.SysRole" >
+    update SYS_ROLE
+    <set >
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        SORT = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isSysInit != null" >
+        IS_SYS_INIT = #{isSysInit,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.SysRole" >
+    update SYS_ROLE
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      SORT = #{sort,jdbcType=INTEGER},
+      IS_SYS_INIT = #{isSysInit,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.SysParamTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.SysParamType" >
+    <constructor >
+      <idArg column="PARAM_TYPE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PARAM_TYPE_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PARAM_TYPE_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PARAM_TYPE_DESC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MODIFY_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PARAM_TYPE_ID, PARAM_TYPE_CODE, PARAM_TYPE_NAME, PARAM_TYPE_DESC, CREATE_TIME, MODIFY_TIME, 
+    STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_PARAM_TYPE
+    where PARAM_TYPE_ID = #{paramTypeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_PARAM_TYPE
+    where PARAM_TYPE_ID = #{paramTypeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.SysParamType" >
+    insert into SYS_PARAM_TYPE (PARAM_TYPE_ID, PARAM_TYPE_CODE, PARAM_TYPE_NAME, 
+      PARAM_TYPE_DESC, CREATE_TIME, MODIFY_TIME, 
+      STATE)
+    values (#{paramTypeId,jdbcType=VARCHAR}, #{paramTypeCode,jdbcType=VARCHAR}, #{paramTypeName,jdbcType=VARCHAR}, 
+      #{paramTypeDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.SysParamType" >
+    insert into SYS_PARAM_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramTypeId != null" >
+        PARAM_TYPE_ID,
+      </if>
+      <if test="paramTypeCode != null" >
+        PARAM_TYPE_CODE,
+      </if>
+      <if test="paramTypeName != null" >
+        PARAM_TYPE_NAME,
+      </if>
+      <if test="paramTypeDesc != null" >
+        PARAM_TYPE_DESC,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramTypeId != null" >
+        #{paramTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="paramTypeCode != null" >
+        #{paramTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramTypeName != null" >
+        #{paramTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramTypeDesc != null" >
+        #{paramTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.SysParamType" >
+    update SYS_PARAM_TYPE
+    <set >
+      <if test="paramTypeCode != null" >
+        PARAM_TYPE_CODE = #{paramTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramTypeName != null" >
+        PARAM_TYPE_NAME = #{paramTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramTypeDesc != null" >
+        PARAM_TYPE_DESC = #{paramTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAM_TYPE_ID = #{paramTypeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.SysParamType" >
+    update SYS_PARAM_TYPE
+    set PARAM_TYPE_CODE = #{paramTypeCode,jdbcType=VARCHAR},
+      PARAM_TYPE_NAME = #{paramTypeName,jdbcType=VARCHAR},
+      PARAM_TYPE_DESC = #{paramTypeDesc,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR}
+    where PARAM_TYPE_ID = #{paramTypeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

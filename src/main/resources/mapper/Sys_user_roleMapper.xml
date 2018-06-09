@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.Sys_user_roleMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.Sys_user_role" >
+    <constructor >
+      <idArg column="USER_ROLE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ROLE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ROLE_ID, USER_ID, ROLE_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER_ROLE
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_USER_ROLE
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.Sys_user_role" >
+    insert into SYS_USER_ROLE (USER_ROLE_ID, USER_ID, ROLE_ID
+      )
+    values (#{userRoleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.Sys_user_role" >
+    insert into SYS_USER_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userRoleId != null" >
+        USER_ROLE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userRoleId != null" >
+        #{userRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.Sys_user_role" >
+    update SYS_USER_ROLE
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.Sys_user_role" >
+    update SYS_USER_ROLE
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

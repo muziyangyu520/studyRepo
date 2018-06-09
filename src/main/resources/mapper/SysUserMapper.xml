@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.SysUser" >
+    <constructor >
+      <idArg column="USER_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_ACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_PWD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SEX" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="ROLE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_MOBILE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_TEL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LAST_LOGIN_TIME" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="CREATE_USER_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATE_TIME" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="UPDATE_TIME" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="STATE" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+
+  </resultMap>
+
+  <resultMap id="sysUserMap" type="com.li.hello.entity.SysUser" >
+      <id column="USER_ID" property="userId"/>
+      <result column="USER_ACCOUNT" property="userAccount" />
+      <result column="USER_PWD" property="userPwd" />
+      <result column="USER_NAME" property="userName" />
+      <result column="SEX" property="sex" />
+      <result column="ROLE_ID" property="roleId" />
+      <result column="USER_MOBILE" property="userMobile" />
+      <result column="USER_TEL" property="userTel" />
+      <result column="USER_EMAIL" property="userEmail" />
+      <result column="LAST_LOGIN_TIME" property="lastLoginTime" />
+      <result column="CREATE_USER_ID" property="createUserId" />
+      <result column="CREATE_TIME" property="createTime" />
+      <result column="UPDATE_TIME" property="updateTime" />
+      <result column="STATE" property="state" />
+      <association property="sysRole" select="getSysRole" column="ROLE_ID" javaType="com.li.hello.entity.SysRole">
+
+      </association>
+  </resultMap>
+
+
+  <resultMap id="sysRoleMap" type="com.li.hello.entity.SysRole" >
+    <id column="ROLE_ID" property="roleId"/>
+    <result column="ROLE_NAME" property="roleName" />
+    <result column="ROLE_DESC" property="roleDesc" />
+    <result column="SORT" property="sort" />
+    <result column="IS_SYS_INIT" property="isSysInit" />
+    <result column="CREATE_TIME" property="createTime" />
+    <result column="MODIFY_TIME" property="modifyTime" />
+    <result column="STATE" property="state" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    USER_ID, USER_ACCOUNT, USER_PWD, USER_NAME, SEX, ROLE_ID, USER_MOBILE, USER_TEL, 
+    USER_EMAIL, LAST_LOGIN_TIME, CREATE_USER_ID, CREATE_TIME, UPDATE_TIME, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findList" resultMap="sysUserMap">
+    select * from SYS_USER
+  </select>
+  
+  <select id="getSysRole" resultMap="sysRoleMap">
+    select * from SYS_ROLE WHERE ROLE_ID = #{ROLE_ID}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.SysUser" >
+    insert into SYS_USER (USER_ID, USER_ACCOUNT, USER_PWD,
+      USER_NAME, SEX, ROLE_ID, 
+      USER_MOBILE, USER_TEL, USER_EMAIL, 
+      LAST_LOGIN_TIME, CREATE_USER_ID, CREATE_TIME, 
+      UPDATE_TIME, STATE)
+    values (#{userId,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{userMobile,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=CHAR}, #{state,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.SysUser" >
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userAccount != null" >
+        USER_ACCOUNT,
+      </if>
+      <if test="userPwd != null" >
+        USER_PWD,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="userMobile != null" >
+        USER_MOBILE,
+      </if>
+      <if test="userTel != null" >
+        USER_TEL,
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL,
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.SysUser" >
+    update SYS_USER
+    <set >
+      <if test="userAccount != null" >
+        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        USER_TEL = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=CHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.SysUser" >
+    update SYS_USER
+    set USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      USER_TEL = #{userTel,jdbcType=VARCHAR},
+      USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=CHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      STATE = #{state,jdbcType=CHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

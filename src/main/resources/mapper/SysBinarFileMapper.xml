@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.SysBinarFileMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.SysBinarFile" >
+    <constructor >
+      <idArg column="FILE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORG_FILE_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FILE_SIZE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REF_NUM" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="USER_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FILE_SAVE_PATH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FILE_ID, ORG_FILE_NAME, FILE_SIZE, REF_NUM, USER_ID, FILE_SAVE_PATH, CREATE_TIME, 
+    STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_BINAR_FILE
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_BINAR_FILE
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.SysBinarFile" >
+    insert into SYS_BINAR_FILE (FILE_ID, ORG_FILE_NAME, FILE_SIZE, 
+      REF_NUM, USER_ID, FILE_SAVE_PATH, 
+      CREATE_TIME, STATE)
+    values (#{fileId,jdbcType=VARCHAR}, #{orgFileName,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, 
+      #{refNum,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{fileSavePath,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.SysBinarFile" >
+    insert into SYS_BINAR_FILE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        FILE_ID,
+      </if>
+      <if test="orgFileName != null" >
+        ORG_FILE_NAME,
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE,
+      </if>
+      <if test="refNum != null" >
+        REF_NUM,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="fileSavePath != null" >
+        FILE_SAVE_PATH,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgFileName != null" >
+        #{orgFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="refNum != null" >
+        #{refNum,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSavePath != null" >
+        #{fileSavePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.SysBinarFile" >
+    update SYS_BINAR_FILE
+    <set >
+      <if test="orgFileName != null" >
+        ORG_FILE_NAME = #{orgFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE = #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="refNum != null" >
+        REF_NUM = #{refNum,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSavePath != null" >
+        FILE_SAVE_PATH = #{fileSavePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.SysBinarFile" >
+    update SYS_BINAR_FILE
+    set ORG_FILE_NAME = #{orgFileName,jdbcType=VARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=VARCHAR},
+      REF_NUM = #{refNum,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      FILE_SAVE_PATH = #{fileSavePath,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR}
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </update>
+</mapper>

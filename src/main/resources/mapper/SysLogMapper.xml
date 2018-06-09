@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.SysLog" >
+    <constructor >
+      <idArg column="LOG_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPERATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_ACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_IP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPERATE_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.li.hello.entity.SysLog" >
+    <constructor >
+      <idArg column="LOG_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPERATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_ACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_IP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPERATE_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NOTE" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOG_ID, OPERATE_TIME, LOG_NAME, LOG_ACCOUNT, LOG_IP, OPERATE_TYPE, LOG_TYPE, CREATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    NOTE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.SysLog" >
+    insert into SYS_LOG (LOG_ID, OPERATE_TIME, LOG_NAME, 
+      LOG_ACCOUNT, LOG_IP, OPERATE_TYPE, 
+      LOG_TYPE, CREATE_TIME, NOTE
+      )
+    values (#{logId,jdbcType=VARCHAR}, #{operateTime,jdbcType=VARCHAR}, #{logName,jdbcType=VARCHAR}, 
+      #{logAccount,jdbcType=VARCHAR}, #{logIp,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, 
+      #{logType,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{note,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.SysLog" >
+    insert into SYS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="operateTime != null" >
+        OPERATE_TIME,
+      </if>
+      <if test="logName != null" >
+        LOG_NAME,
+      </if>
+      <if test="logAccount != null" >
+        LOG_ACCOUNT,
+      </if>
+      <if test="logIp != null" >
+        LOG_IP,
+      </if>
+      <if test="operateType != null" >
+        OPERATE_TYPE,
+      </if>
+      <if test="logType != null" >
+        LOG_TYPE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="logName != null" >
+        #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="logAccount != null" >
+        #{logAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null" >
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.SysLog" >
+    update SYS_LOG
+    <set >
+      <if test="operateTime != null" >
+        OPERATE_TIME = #{operateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="logName != null" >
+        LOG_NAME = #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="logAccount != null" >
+        LOG_ACCOUNT = #{logAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null" >
+        LOG_IP = #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null" >
+        OPERATE_TYPE = #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        LOG_TYPE = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.li.hello.entity.SysLog" >
+    update SYS_LOG
+    set OPERATE_TIME = #{operateTime,jdbcType=VARCHAR},
+      LOG_NAME = #{logName,jdbcType=VARCHAR},
+      LOG_ACCOUNT = #{logAccount,jdbcType=VARCHAR},
+      LOG_IP = #{logIp,jdbcType=VARCHAR},
+      OPERATE_TYPE = #{operateType,jdbcType=VARCHAR},
+      LOG_TYPE = #{logType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=LONGVARCHAR}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.SysLog" >
+    update SYS_LOG
+    set OPERATE_TIME = #{operateTime,jdbcType=VARCHAR},
+      LOG_NAME = #{logName,jdbcType=VARCHAR},
+      LOG_ACCOUNT = #{logAccount,jdbcType=VARCHAR},
+      LOG_IP = #{logIp,jdbcType=VARCHAR},
+      OPERATE_TYPE = #{operateType,jdbcType=VARCHAR},
+      LOG_TYPE = #{logType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

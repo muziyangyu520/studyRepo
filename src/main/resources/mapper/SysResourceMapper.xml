@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.SysResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.SysResource" >
+    <constructor >
+      <idArg column="RES_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PAR_RES_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_DES" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_URL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_SEQ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CREATE_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MODIFY_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RES_ID, RES_CODE, RES_NAME, PAR_RES_ID, RES_DES, RES_URL, RES_SEQ, CREATE_TIME, MODIFY_TIME, 
+    STATE, RES_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_RESOURCE
+    where RES_ID = #{resId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_RESOURCE
+    where RES_ID = #{resId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.SysResource" >
+    insert into SYS_RESOURCE (RES_ID, RES_CODE, RES_NAME, 
+      PAR_RES_ID, RES_DES, RES_URL, 
+      RES_SEQ, CREATE_TIME, MODIFY_TIME, 
+      STATE, RES_TYPE)
+    values (#{resId,jdbcType=VARCHAR}, #{resCode,jdbcType=VARCHAR}, #{resName,jdbcType=VARCHAR}, 
+      #{parResId,jdbcType=VARCHAR}, #{resDes,jdbcType=VARCHAR}, #{resUrl,jdbcType=VARCHAR}, 
+      #{resSeq,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.SysResource" >
+    insert into SYS_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resId != null" >
+        RES_ID,
+      </if>
+      <if test="resCode != null" >
+        RES_CODE,
+      </if>
+      <if test="resName != null" >
+        RES_NAME,
+      </if>
+      <if test="parResId != null" >
+        PAR_RES_ID,
+      </if>
+      <if test="resDes != null" >
+        RES_DES,
+      </if>
+      <if test="resUrl != null" >
+        RES_URL,
+      </if>
+      <if test="resSeq != null" >
+        RES_SEQ,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="resType != null" >
+        RES_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resId != null" >
+        #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="resCode != null" >
+        #{resCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resName != null" >
+        #{resName,jdbcType=VARCHAR},
+      </if>
+      <if test="parResId != null" >
+        #{parResId,jdbcType=VARCHAR},
+      </if>
+      <if test="resDes != null" >
+        #{resDes,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null" >
+        #{resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resSeq != null" >
+        #{resSeq,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null" >
+        #{resType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.SysResource" >
+    update SYS_RESOURCE
+    <set >
+      <if test="resCode != null" >
+        RES_CODE = #{resCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resName != null" >
+        RES_NAME = #{resName,jdbcType=VARCHAR},
+      </if>
+      <if test="parResId != null" >
+        PAR_RES_ID = #{parResId,jdbcType=VARCHAR},
+      </if>
+      <if test="resDes != null" >
+        RES_DES = #{resDes,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null" >
+        RES_URL = #{resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resSeq != null" >
+        RES_SEQ = #{resSeq,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null" >
+        RES_TYPE = #{resType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RES_ID = #{resId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.SysResource" >
+    update SYS_RESOURCE
+    set RES_CODE = #{resCode,jdbcType=VARCHAR},
+      RES_NAME = #{resName,jdbcType=VARCHAR},
+      PAR_RES_ID = #{parResId,jdbcType=VARCHAR},
+      RES_DES = #{resDes,jdbcType=VARCHAR},
+      RES_URL = #{resUrl,jdbcType=VARCHAR},
+      RES_SEQ = #{resSeq,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      RES_TYPE = #{resType,jdbcType=VARCHAR}
+    where RES_ID = #{resId,jdbcType=VARCHAR}
+  </update>
+</mapper>

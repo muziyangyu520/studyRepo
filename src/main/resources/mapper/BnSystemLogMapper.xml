@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.BnSystemLogMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.BnSystemLog" >
+    <constructor >
+      <idArg column="LOG_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SYS_USER_KEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_OPERATE_DT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOGIN_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOGIN_IP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_ACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_OPERATE_CONTENT" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.li.hello.entity.BnSystemLog" >
+    <constructor >
+      <idArg column="LOG_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SYS_USER_KEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_OPERATE_DT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOGIN_TIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOGIN_IP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_ACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOG_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_OPERATE_CONTENT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USER_OPERATE" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOG_ID, SYS_USER_KEY, USER_OPERATE_DT, LOGIN_TIME, LOGIN_IP, USER_ACCOUNT, LOG_TYPE, 
+    USER_OPERATE_CONTENT
+  </sql>
+  <sql id="Blob_Column_List" >
+    USER_OPERATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BN_SYSTEM_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BN_SYSTEM_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.BnSystemLog" >
+    insert into BN_SYSTEM_LOG (LOG_ID, SYS_USER_KEY, USER_OPERATE_DT, 
+      LOGIN_TIME, LOGIN_IP, USER_ACCOUNT, 
+      LOG_TYPE, USER_OPERATE_CONTENT, USER_OPERATE
+      )
+    values (#{logId,jdbcType=VARCHAR}, #{sysUserKey,jdbcType=VARCHAR}, #{userOperateDt,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, 
+      #{logType,jdbcType=VARCHAR}, #{userOperateContent,jdbcType=VARCHAR}, #{userOperate,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.BnSystemLog" >
+    insert into BN_SYSTEM_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="sysUserKey != null" >
+        SYS_USER_KEY,
+      </if>
+      <if test="userOperateDt != null" >
+        USER_OPERATE_DT,
+      </if>
+      <if test="loginTime != null" >
+        LOGIN_TIME,
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP,
+      </if>
+      <if test="userAccount != null" >
+        USER_ACCOUNT,
+      </if>
+      <if test="logType != null" >
+        LOG_TYPE,
+      </if>
+      <if test="userOperateContent != null" >
+        USER_OPERATE_CONTENT,
+      </if>
+      <if test="userOperate != null" >
+        USER_OPERATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysUserKey != null" >
+        #{sysUserKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userOperateDt != null" >
+        #{userOperateDt,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="userOperateContent != null" >
+        #{userOperateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userOperate != null" >
+        #{userOperate,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.BnSystemLog" >
+    update BN_SYSTEM_LOG
+    <set >
+      <if test="sysUserKey != null" >
+        SYS_USER_KEY = #{sysUserKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userOperateDt != null" >
+        USER_OPERATE_DT = #{userOperateDt,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        LOGIN_TIME = #{loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        LOG_TYPE = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="userOperateContent != null" >
+        USER_OPERATE_CONTENT = #{userOperateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userOperate != null" >
+        USER_OPERATE = #{userOperate,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.li.hello.entity.BnSystemLog" >
+    update BN_SYSTEM_LOG
+    set SYS_USER_KEY = #{sysUserKey,jdbcType=VARCHAR},
+      USER_OPERATE_DT = #{userOperateDt,jdbcType=VARCHAR},
+      LOGIN_TIME = #{loginTime,jdbcType=VARCHAR},
+      LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+      USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      LOG_TYPE = #{logType,jdbcType=VARCHAR},
+      USER_OPERATE_CONTENT = #{userOperateContent,jdbcType=VARCHAR},
+      USER_OPERATE = #{userOperate,jdbcType=LONGVARCHAR}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.BnSystemLog" >
+    update BN_SYSTEM_LOG
+    set SYS_USER_KEY = #{sysUserKey,jdbcType=VARCHAR},
+      USER_OPERATE_DT = #{userOperateDt,jdbcType=VARCHAR},
+      LOGIN_TIME = #{loginTime,jdbcType=VARCHAR},
+      LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+      USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      LOG_TYPE = #{logType,jdbcType=VARCHAR},
+      USER_OPERATE_CONTENT = #{userOperateContent,jdbcType=VARCHAR}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

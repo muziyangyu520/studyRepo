@@ -1,0 +1,32 @@
+server:
+  port: 8888
+  maxHttpHeaderSize: 10240
+
+
+
+#springboot整合mybatis框架
+#加载Mybatis配置文件
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  config-location: classpath:mapper/config/sqlMapConfig.xml
+  #定义别名
+  #type-aliases-package: com.turbur.entity
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false #查询结果合理化（启用后查询超过最大页码后返回最后一页数据）
+  support-methods-arguments: true
+  params: count=countSql
+#数据源
+spring:
+  application:
+    name: stu
+  datasource:
+    url: jdbc:mysql://140.143.223.200:3306/gzfwpt
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: lixiang
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp

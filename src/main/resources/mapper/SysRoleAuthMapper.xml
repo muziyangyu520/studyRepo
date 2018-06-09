@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.hello.mapper.SysRoleAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.li.hello.entity.SysRoleAuth" >
+    <constructor >
+      <idArg column="SYS_ACCREDIT_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SYS_ROLE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPER_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES_ADDR" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SYS_ACCREDIT_ID, SYS_ROLE_ID, RES_ID, OPER_ID, RES_ADDR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE_AUTH
+    where SYS_ACCREDIT_ID = #{sysAccreditId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_ROLE_AUTH
+    where SYS_ACCREDIT_ID = #{sysAccreditId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.li.hello.entity.SysRoleAuth" >
+    insert into SYS_ROLE_AUTH (SYS_ACCREDIT_ID, SYS_ROLE_ID, RES_ID, 
+      OPER_ID, RES_ADDR)
+    values (#{sysAccreditId,jdbcType=VARCHAR}, #{sysRoleId,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, 
+      #{operId,jdbcType=VARCHAR}, #{resAddr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.li.hello.entity.SysRoleAuth" >
+    insert into SYS_ROLE_AUTH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysAccreditId != null" >
+        SYS_ACCREDIT_ID,
+      </if>
+      <if test="sysRoleId != null" >
+        SYS_ROLE_ID,
+      </if>
+      <if test="resId != null" >
+        RES_ID,
+      </if>
+      <if test="operId != null" >
+        OPER_ID,
+      </if>
+      <if test="resAddr != null" >
+        RES_ADDR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysAccreditId != null" >
+        #{sysAccreditId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRoleId != null" >
+        #{sysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="resId != null" >
+        #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=VARCHAR},
+      </if>
+      <if test="resAddr != null" >
+        #{resAddr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.li.hello.entity.SysRoleAuth" >
+    update SYS_ROLE_AUTH
+    <set >
+      <if test="sysRoleId != null" >
+        SYS_ROLE_ID = #{sysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="resId != null" >
+        RES_ID = #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="operId != null" >
+        OPER_ID = #{operId,jdbcType=VARCHAR},
+      </if>
+      <if test="resAddr != null" >
+        RES_ADDR = #{resAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SYS_ACCREDIT_ID = #{sysAccreditId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.li.hello.entity.SysRoleAuth" >
+    update SYS_ROLE_AUTH
+    set SYS_ROLE_ID = #{sysRoleId,jdbcType=VARCHAR},
+      RES_ID = #{resId,jdbcType=VARCHAR},
+      OPER_ID = #{operId,jdbcType=VARCHAR},
+      RES_ADDR = #{resAddr,jdbcType=VARCHAR}
+    where SYS_ACCREDIT_ID = #{sysAccreditId,jdbcType=VARCHAR}
+  </update>
+</mapper>
